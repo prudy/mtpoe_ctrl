@@ -453,11 +453,20 @@ char *try_to_detect_poe_board(int fallback_val){
 			int a;
 			buf[len] = '\0';
 			if(len > 0 && buf[len - 1] == '\n')
-				buf[len - 1] = '\0';
+				buf[--len] = '\0';
 			for(a = 0; a < BOARDS_NUM; a++){
-				if((strlen(buf) == strlen(poe_boards[a].name)) && !strcmp(buf, poe_boards[a].name)){
-					board_index = a;
-				}
+				const char *n = poe_boards[a].name;
+				const char *c;
+				do{
+					c = strchr(n, ' ');
+					int n_len = (c == NULL) ? strlen(n) : (int)(c - n);
+					if((n_len = len) && !strncmp(buf, n, len)){
+						board_index = a;
+						a = BOARDS_NUM;
+						break;
+					}
+					n = c + 1;
+				} while(c != NULL);
 			}
 		}
 		close(fd);

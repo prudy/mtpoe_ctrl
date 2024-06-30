@@ -6,12 +6,11 @@
 
 #define BOARDS_NUM (sizeof(poe_boards)/sizeof(poe_boards[0]))
 #define POE_BOARD_NAME_LEN 32
-#define SPIDEV_MAX_LEN 20
 
 struct poe_board {
-	char name[POE_BOARD_NAME_LEN];
+	char *name;
 	int proto_ver;
-	char spidev[SPIDEV_MAX_LEN];
+	char *spidev;
 	int ports_num;
 	int port_state_map[POE_CMD_PORTS_MAX];
 };
@@ -31,12 +30,12 @@ const struct poe_board poe_boards[ ] = {
 		.spidev = "/dev/spidev0.2",
 		.ports_num = 4,
 		.port_state_map = {0xd, 0xc, 0xb, 0xa}
-	}, { /* RouterBOARD RB5009UPr+S+IN */
-		.name = "mikrotik,rb5009upr",
+	}, { /* RouterBOARD RB5009UPr+S+IN and its base */
+		.name = "mikrotik,rb5009 mikrotik,rb5009upr",
 		.proto_ver = 4,
 		.spidev = "/dev/spidev2.0",
 		.ports_num = 8,
-		.port_state_map = {0x8, 0x7, 0x6, 0x5, 0x4, 0xb, 0xa, 0x9}
+		.port_state_map = {0x8, 0x7, 0x6, 0x5, 0x4, 0x3, 0x2, 0x1}
 	}
 };//----------------------------------------------------------------------------------
 
