@@ -31,7 +31,7 @@ const struct poe_board poe_boards[ ] = {
 		.ports_num = 4,
 		.port_state_map = {0xd, 0xc, 0xb, 0xa}
 	}, { /* RouterBOARD RB5009UPr+S+IN and its base */
-		.name = "mikrotik,rb5009 mikrotik,rb5009upr",
+		.name = "mikrotik,rb5009 mikrotik,rb5009ug mikrotik,rb5009upr",
 		.proto_ver = 4,
 		.spidev = "/dev/spidev2.0",
 		.ports_num = 8,
