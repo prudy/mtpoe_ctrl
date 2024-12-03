@@ -289,7 +289,7 @@ static void __set_poe(int port, int val){
 */
 static void do_action_set_poe(void){
 	if(port < 0 || port >= POE_PORTS_N)
-		die_and_mess(-20, "port value must be 0..%d", POE_PORTS_N);
+		die_and_mess(-20, "port value must be 0..%d", POE_PORTS_N-1);
 	if(val < 0 || val > 2)
 		die_and_mess(-20, "PoE value must be 0..2");
 	__set_poe(port, val);
